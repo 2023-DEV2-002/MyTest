@@ -54,6 +54,9 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun RegularDigitalClock() {
+
+
+
         Box(Modifier.fillMaxWidth()) {
             Text(
                 text = currentTime.value,
