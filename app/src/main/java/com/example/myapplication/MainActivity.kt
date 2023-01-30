@@ -21,12 +21,7 @@ import java.util.*
 class MainActivity : ComponentActivity() {
 
 
-    private val currentTime: MutableState<String> = mutableStateOf(
-        SimpleDateFormat(
-            "HH:mm:ss",
-            Locale.GERMANY
-        ).format(Date(System.currentTimeMillis())).toString()
-    )
+    private val currentTime: MutableState<String> = mutableStateOf(getCurrentFormattedTime())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,21 +30,27 @@ class MainActivity : ComponentActivity() {
 
         handler.postDelayed(object : Runnable {
             override fun run() {
-                currentTime.value = SimpleDateFormat(
-                    "HH:mm:ss",
-                    Locale.GERMANY
-                ).format(Date(System.currentTimeMillis())).toString()
+                currentTime.value = getCurrentFormattedTime()
 
                 handler.postDelayed(this, 1000)
             }
         }, 0)
-
 
         setContent {
             RegularDigitalClock()
         }
     }
 
+
+    private fun getCurrentFormattedTime(): String {
+        return SimpleDateFormat("HH:mm:ss", Locale.GERMANY)
+            .format(Date(System.currentTimeMillis()))
+            .toString()
+    }
+
+
+
+    /* Composable functions */
 
     @Composable
     fun RegularDigitalClock() {
