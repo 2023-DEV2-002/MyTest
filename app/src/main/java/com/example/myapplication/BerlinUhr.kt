@@ -1,8 +1,37 @@
 package com.example.myapplication
 
+import android.os.Handler
+import android.os.Looper
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
+import java.text.SimpleDateFormat
+import java.util.*
 
 class BerlinUhr {
+
+    val currentTimeState: MutableState<String> = mutableStateOf(getCurrentFormattedTime())
+    val secondsLampColorState: MutableState<Color> = mutableStateOf(Color.White)
+
+    init {
+        val handler = Handler(Looper.getMainLooper())
+
+
+        handler.postDelayed(object : Runnable {
+            override fun run() {
+                currentTimeState.value = getCurrentFormattedTime()
+                secondsLampColorState.value = getSecondLampColor(getSecondsComponent(currentTimeState.value))
+                handler.postDelayed(this, 1000)
+            }
+        }, 0)
+    }
+
+
+    private fun getCurrentFormattedTime(): String {
+        return SimpleDateFormat("HH:mm:ss", Locale.GERMANY)
+            .format(Date(System.currentTimeMillis()))
+            .toString()
+    }
 
 
     fun splitTimeToIntList(time: String) = time.split(":").map { it.toInt() }
