@@ -57,4 +57,16 @@ class BerlinUhrTest {
         val colors = berlinUhr.fiveHoursRowColorListState.value
         Assert.assertEquals(result, colors)
     }
+
+
+    @Test
+    fun `get two red colors and two white colors in hours when clocks marks five`() {
+        val berlinUhr = BerlinUhr()
+        berlinUhr.updateHoursColorsList(17)
+
+        val result = listOf(Color.Red, Color.Red, Color.White, Color.White)
+        val colors = berlinUhr.hoursRowColorListState.value
+
+        Assert.assertEquals(result, colors)
+    }
 }

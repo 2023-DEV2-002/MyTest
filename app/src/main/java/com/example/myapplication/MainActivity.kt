@@ -37,6 +37,7 @@ class MainActivity : ComponentActivity() {
 
             ) {
                 SecondsLamp()
+                FiveHourRows()
                 HourRows()
                 RegularDigitalClock()
             }
@@ -61,13 +62,33 @@ class MainActivity : ComponentActivity() {
     }
 
     @Composable
-    fun HourRows() {
+    fun FiveHourRows() {
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Center
         ) {
 
             for (item in berlinUhr.fiveHoursRowColorListState.value) {
+                Box(
+                    modifier = Modifier
+                        .size(80.dp, 50.dp)
+                        .clip(RectangleShape)
+                        .padding(7.dp)
+                        .border(width = 2.dp, color = Color.Black)
+                        .background(item)
+                )
+            }
+        }
+    }
+
+    @Composable
+    fun HourRows() {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
+        ) {
+
+            for (item in berlinUhr.hoursRowColorListState.value) {
                 Box(
                     modifier = Modifier
                         .size(80.dp, 50.dp)
