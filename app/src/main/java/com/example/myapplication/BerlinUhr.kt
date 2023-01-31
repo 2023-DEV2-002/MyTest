@@ -15,15 +15,14 @@ class BerlinUhr {
     val fiveHoursRowColorListState =
         mutableStateOf(listOf(Color.White, Color.White, Color.White, Color.White))
 
-    init {
-        val handler = Handler(Looper.getMainLooper())
+    private val handler by lazy { Handler(Looper.getMainLooper()) }
 
-
+    fun start() {
         handler.postDelayed(object : Runnable {
             override fun run() {
                 currentTimeState.value = getCurrentFormattedTime()
-                secondsLampColorState.value =
-                    getSecondLampColor(getSecondsComponent(currentTimeState.value))
+
+                updateSecondLampColor(getSecondsComponent(currentTimeState.value))
 
                 updateFiveHoursColorsList(getHoursComponent(currentTimeState.value))
 
@@ -49,13 +48,13 @@ class BerlinUhr {
     fun getMinutesComponent(time: String) = splitTimeToIntList(time)[1]
 
 
-    fun getSecondLampColor(sec: Int): Color {
-        return if (sec % 2 == 0)
+    fun updateSecondLampColor(sec: Int) {
+        secondsLampColorState.value = if (sec % 2 == 0)
             Color.Black
         else Color.White
     }
 
-    private fun updateFiveHoursColorsList(hours: Int) {
+    fun updateFiveHoursColorsList(hours: Int) {
         val tmpList = mutableListOf(Color.White, Color.White, Color.White, Color.White)
 
         for (i in 0 until hours / 5) {
