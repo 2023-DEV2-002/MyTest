@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -35,6 +36,7 @@ class MainActivity : ComponentActivity() {
 
             ) {
                 SecondsLamp()
+                HourRows()
                 RegularDigitalClock()
             }
 
@@ -54,6 +56,26 @@ class MainActivity : ComponentActivity() {
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.fillMaxWidth()
             )
+        }
+    }
+
+    @Composable
+    fun HourRows() {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
+        ) {
+
+            for (item in berlinUhr.fiveHoursRowColorListState.value) {
+                Box(
+                    modifier = Modifier
+                        .size(80.dp, 50.dp)
+                        .clip(RectangleShape)
+                        .padding(7.dp)
+                        .border(width = 2.dp, color = Color.Black)
+                        .background(item)
+                )
+            }
         }
     }
 
