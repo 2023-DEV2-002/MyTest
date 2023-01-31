@@ -25,8 +25,15 @@ class BerlinUhrTest {
     @Test
     fun `get hours component from time string`() {
         val berlinUhr = BerlinUhr()
-        val seconds = berlinUhr.getHoursComponent("18:05:26")
-        Assert.assertEquals(18, seconds)
+        val hours = berlinUhr.getHoursComponent("18:05:26")
+        Assert.assertEquals(18, hours)
+    }
+
+    @Test
+    fun `get minutes component from time string`() {
+        val berlinUhr = BerlinUhr()
+        val minutes = berlinUhr.getMinutesComponent("18:05:26")
+        Assert.assertEquals(5, minutes)
     }
 
 

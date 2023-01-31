@@ -11,6 +11,8 @@ class BerlinUhr {
 
     fun getHoursComponent(time: String) = splitTimeToIntList(time).first()
 
+    fun getMinutesComponent(time: String) = splitTimeToIntList(time)[1]
+
 
     fun getSecondLampColor(sec: Int): Color {
         return if (sec % 2 == 0)
