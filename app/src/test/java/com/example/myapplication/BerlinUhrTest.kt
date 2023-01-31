@@ -8,7 +8,6 @@ import org.junit.Test
 class BerlinUhrTest {
 
 
-
     @Test
     fun `convert string time into a list 3 elements`() {
         val berlinUhr = BerlinUhr()
@@ -81,6 +80,20 @@ class BerlinUhrTest {
         )
 
         val colors = berlinUhr.fiveMinutesRowColorListState.value
+
+        Assert.assertEquals(result, colors)
+
+    }
+
+
+    @Test
+    fun `get one yellow color and three white colors when minutes mark 36`() {
+        val berlinUhr = BerlinUhr()
+        berlinUhr.updateMinutesColorsList(36)
+
+        val result = listOf(Color.Yellow, Color.White, Color.White, Color.White)
+
+        val colors = berlinUhr.minutesRowColorListState.value
 
         Assert.assertEquals(result, colors)
 

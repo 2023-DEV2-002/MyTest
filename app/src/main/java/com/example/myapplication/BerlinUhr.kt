@@ -25,6 +25,10 @@ class BerlinUhr {
         )
     )
 
+    val minutesRowColorListState = mutableStateOf(
+        listOf(Color.White, Color.White, Color.White, Color.White)
+    )
+
     private val handler by lazy { Handler(Looper.getMainLooper()) }
 
     fun start() {
@@ -42,6 +46,7 @@ class BerlinUhr {
 
                     //Updating Minutes led
                     updateFiveMinutesColorsList(getMinutesComponent(this))
+                    updateMinutesColorsList(getMinutesComponent(this))
 
                 }
 
@@ -104,6 +109,16 @@ class BerlinUhr {
         }
 
         fiveMinutesRowColorListState.value = tmpList
+    }
+
+    fun updateMinutesColorsList(minutes: Int) {
+        val tmpList = mutableListOf(Color.White, Color.White, Color.White, Color.White)
+
+        for (pos in 0 until minutes % 5) {
+            tmpList[pos] = Color.Yellow
+        }
+
+        minutesRowColorListState.value =  tmpList
     }
 
 
