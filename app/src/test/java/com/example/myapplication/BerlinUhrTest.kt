@@ -22,6 +22,13 @@ class BerlinUhrTest {
         Assert.assertEquals(26, seconds)
     }
 
+    @Test
+    fun `get hours component from time string`() {
+        val berlinUhr = BerlinUhr()
+        val seconds = berlinUhr.getHoursComponent("18:05:26")
+        Assert.assertEquals(18, seconds)
+    }
+
 
     @Test
     fun `get black color when odd seconds are shown`() {
